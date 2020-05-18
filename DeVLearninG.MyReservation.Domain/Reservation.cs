@@ -9,7 +9,7 @@ namespace DeVLearninG.MyReservation.Domain
         public Guid Id { get; set; }
         public Guid IdCustomer { get; set; }
         public Guid IdEvent { get; set; }
-        public DateTime Date { get; set; }
+        public DateTimeOffset Date { get; set; }
 
 
         public Customer Customer { get; set; }

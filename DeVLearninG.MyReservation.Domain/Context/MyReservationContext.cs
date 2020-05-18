@@ -115,13 +115,28 @@ namespace DeVLearninG.MyReservation.Domain
             modelBuilder.Entity<EventType>().HasData(new EventType { Id = EventTypeEnum.PaidEvent, Name = nameof(EventTypeEnum.PaidEvent) });
 
             RemovePluralizingTableNameConvention(modelBuilder);
+
+            AddCreatedDatesAndUpdatedDate(modelBuilder);
         }
 
-        public void RemovePluralizingTableNameConvention(ModelBuilder modelBuilder)
+        private void RemovePluralizingTableNameConvention(ModelBuilder modelBuilder)
         {
             foreach (IMutableEntityType entity in modelBuilder.Model.GetEntityTypes())
             {
                 entity.SetTableName(entity.DisplayName());
+            }
+        }
+
+        private void AddCreatedDatesAndUpdatedDate(ModelBuilder modelBuilder)
+        {
+            var allEntities = modelBuilder.Model.GetEntityTypes();
+
+            foreach (var entity in allEntities)
+            {
+                entity.AddProperty("CreatedDate", typeof(DateTimeOffset))
+                    .SetDefaultValueSql("sysdatetimeoffset()");
+                entity.AddProperty("UpdatedDate", typeof(DateTimeOffset))
+                    .SetDefaultValueSql("sysdatetimeoffset()");
             }
         }
     }

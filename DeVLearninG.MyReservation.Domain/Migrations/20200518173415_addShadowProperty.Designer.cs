@@ -4,15 +4,17 @@ using DeVLearninG.MyReservation.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 
 namespace DeVLearninG.MyReservation.Domain.Migrations
 {
     [DbContext(typeof(MyReservationContext))]
-    partial class MyReservationContextModelSnapshot : ModelSnapshot
+    [Migration("20200518173415_addShadowProperty")]
+    partial class addShadowProperty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
