@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeVLearninG.MyReservation.Domain", "DeVLearninG.MyReservation.Domain\DeVLearninG.MyReservation.Domain.csproj", "{DC38BA86-FF7D-4074-9164-5ED087A9AD7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeVLearninG.MyReservation.Domain", "DeVLearninG.MyReservation.Domain\DeVLearninG.MyReservation.Domain.csproj", "{DC38BA86-FF7D-4074-9164-5ED087A9AD7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeVLearninG.MyReservation.Test", "DeVLearninG.MyReservation.Test\DeVLearninG.MyReservation.Test.csproj", "{6DA7D1A7-9403-4A39-949B-2C5C482F11F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{DC38BA86-FF7D-4074-9164-5ED087A9AD7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC38BA86-FF7D-4074-9164-5ED087A9AD7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC38BA86-FF7D-4074-9164-5ED087A9AD7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DA7D1A7-9403-4A39-949B-2C5C482F11F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DA7D1A7-9403-4A39-949B-2C5C482F11F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DA7D1A7-9403-4A39-949B-2C5C482F11F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DA7D1A7-9403-4A39-949B-2C5C482F11F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

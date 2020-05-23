@@ -1,18 +1,37 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+  <PropertyGroup>
+    <SSDTUnitTestPath Condition="'$(SSDTUnitTestPath)' == ''">$(VsInstallRoot)\Common7\IDE\Extensions\Microsoft\SQLDB</SSDTUnitTestPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SSDTPath Condition="'$(SSDTPath)' == ''">$(VsInstallRoot)\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130</SSDTPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="Migrations\20200517212409_addEventType.cs" />
     <Compile Remove="Migrations\20200517212409_addEventType.Designer.cs" />
     <Compile Remove="Migrations\20200517212532_addEventType.cs" />
     <Compile Remove="Migrations\20200517212532_addEventType.Designer.cs" />
+    <Compile Remove="Migrations\20200521103746_storedTest.cs" />
+    <Compile Remove="Migrations\20200521103746_storedTest.Designer.cs" />
+    <Compile Remove="Migrations\20200521110914_storedTest.cs" />
+    <Compile Remove="Migrations\20200521110914_storedTest.Designer.cs" />
   </ItemGroup>
-
+  <ItemGroup>
+    <None Remove="Migrations\addReservationStored_ReadAndList_Down.sql" />
+    <None Remove="Migrations\addReservationStored_ReadAndList_Up.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\scripts\addReservationStored\Up.sql" />
+    <EmbeddedResource Include="Migrations\scripts\addReservationStored\Down.sql" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" Version="3.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.4">
@@ -20,5 +39,4 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-
 </Project>

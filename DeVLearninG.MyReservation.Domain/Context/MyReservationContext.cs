@@ -2,21 +2,44 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.IO;
+using System.Linq;
 
 namespace DeVLearninG.MyReservation.Domain
 {
     public class MyReservationContext : DbContext
     {
+        private string _connectionString;
+
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
-        public DbSet<EventType> EventTypes { get; set; }
+        public DbSet<EventPaymentType> EventTypes { get; set; }
+
+        public DbSet<ReservationReadResult> ReservationsReadResult { get; set; }
+
+        public MyReservationContext()
+        {
+            _connectionString = @"Server=.\SQLEXPRESS14;Database=MyReservation;Trusted_Connection=True;";
+        }
+
+        public MyReservationContext(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
+        public MyReservationContext(DbContextOptions options) : base(options)
+        {
+
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS14;Database=MyReservation;Trusted_Connection=True;",
-                x => x.UseNetTopologySuite());
+            base.OnConfiguring(optionsBuilder);
+
+            optionsBuilder.UseSqlServer(this._connectionString,
+               x => x.UseNetTopologySuite());
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -27,7 +50,7 @@ namespace DeVLearninG.MyReservation.Domain
              .HasDefaultValueSql("newid()");
 
             modelBuilder.Entity<Event>()
-                .Property(x => x.IdEventType)
+                .Property(x => x.IdEventPaymentType)
                 .IsRequired();
 
             modelBuilder.Entity<Event>()
@@ -51,9 +74,9 @@ namespace DeVLearninG.MyReservation.Domain
                 .HasForeignKey(x => x.IdLocation);
 
             modelBuilder.Entity<Event>()
-                .HasOne(x => x.EventType)
+                .HasOne(x => x.EventPaymentType)
                 .WithMany()
-                .HasForeignKey(x => x.IdEventType)
+                .HasForeignKey(x => x.IdEventPaymentType)
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Event>()
@@ -63,7 +86,7 @@ namespace DeVLearninG.MyReservation.Domain
             #endregion
 
             #region EventType
-            modelBuilder.Entity<EventType>()
+            modelBuilder.Entity<EventPaymentType>()
                 .Property(x => x.Name)
                 .IsRequired()
                 .HasMaxLength(255);
@@ -111,8 +134,16 @@ namespace DeVLearninG.MyReservation.Domain
                 .HasDefaultValueSql("newid()");
             #endregion
 
-            modelBuilder.Entity<EventType>().HasData(new EventType { Id = EventTypeEnum.FreeEvent, Name = nameof(EventTypeEnum.FreeEvent) });
-            modelBuilder.Entity<EventType>().HasData(new EventType { Id = EventTypeEnum.PaidEvent, Name = nameof(EventTypeEnum.PaidEvent) });
+            #region EventPaymentType
+            modelBuilder.Entity<EventPaymentType>().HasData(new EventPaymentType { Id = EventPaymentTypeEnum.FreeEvent, Name = nameof(EventPaymentTypeEnum.FreeEvent) });
+            modelBuilder.Entity<EventPaymentType>().HasData(new EventPaymentType { Id = EventPaymentTypeEnum.PaidEvent, Name = nameof(EventPaymentTypeEnum.PaidEvent) });
+            #endregion
+
+            #region ReservationsReadResult
+            modelBuilder.Entity<ReservationReadResult>()
+                .HasNoKey()
+                .ToView(null);
+            #endregion
 
             RemovePluralizingTableNameConvention(modelBuilder);
 
@@ -129,7 +160,8 @@ namespace DeVLearninG.MyReservation.Domain
 
         private void AddCreatedDatesAndUpdatedDate(ModelBuilder modelBuilder)
         {
-            var allEntities = modelBuilder.Model.GetEntityTypes();
+            var allEntities = modelBuilder.Model.GetEntityTypes()
+                .Where(x => !x.IsKeyless);
 
             foreach (var entity in allEntities)
             {
@@ -139,5 +171,34 @@ namespace DeVLearninG.MyReservation.Domain
                     .SetDefaultValueSql("sysdatetimeoffset()");
             }
         }
+
     }
+
+    public static class MigrationUtility
+    {
+        public enum MigrationType
+        {
+            Up,
+            Down
+        }
+
+        public static string ReadSql(Type migrationType, MigrationType migrationTypeEnum)
+        {
+            var assembly = migrationType.Assembly;
+            string resourceName = $"{migrationType.Namespace}.scripts.{migrationType.Name}.{migrationTypeEnum.ToString()}.sql";
+            using (System.IO.Stream stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                if (stream == null)
+                {
+                    throw new FileNotFoundException("Unable to find the SQL file from an embedded resource", resourceName);
+                }
+                using (var reader = new StreamReader(stream))
+                {
+                    string content = reader.ReadToEnd();
+                    return content;
+                }
+            }
+        }
+    }
+
 }

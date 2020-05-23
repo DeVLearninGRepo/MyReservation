@@ -4,15 +4,15 @@ using System.Text;
 
 namespace DeVLearninG.MyReservation.Domain
 {
-    public enum EventTypeEnum
+    public enum EventPaymentTypeEnum
     {
         PaidEvent = 1,
         FreeEvent = 2
     }
 
-    public class EventType
+    public class EventPaymentType
     {
-        public EventTypeEnum Id { get; set; }
+        public EventPaymentTypeEnum Id { get; set; }
         public string Name { get; set; }
     }
 }

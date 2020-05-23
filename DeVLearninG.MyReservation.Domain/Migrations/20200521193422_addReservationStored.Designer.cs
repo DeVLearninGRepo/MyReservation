@@ -4,15 +4,17 @@ using DeVLearninG.MyReservation.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 
 namespace DeVLearninG.MyReservation.Domain.Migrations
 {
     [DbContext(typeof(MyReservationContext))]
-    partial class MyReservationContextModelSnapshot : ModelSnapshot
+    [Migration("20200521193422_addReservationStored")]
+    partial class addReservationStored
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,7 +74,7 @@ namespace DeVLearninG.MyReservation.Domain.Migrations
                         .HasColumnType("nvarchar(4000)")
                         .HasMaxLength(4000);
 
-                    b.Property<int>("IdEventPaymentType")
+                    b.Property<int>("IdEventType")
                         .HasColumnType("int");
 
                     b.Property<Guid?>("IdLocation")
@@ -90,7 +92,7 @@ namespace DeVLearninG.MyReservation.Domain.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdEventPaymentType");
+                    b.HasIndex("IdEventType");
 
                     b.HasIndex("IdLocation");
 
@@ -202,9 +204,9 @@ namespace DeVLearninG.MyReservation.Domain.Migrations
 
             modelBuilder.Entity("DeVLearninG.MyReservation.Domain.Event", b =>
                 {
-                    b.HasOne("DeVLearninG.MyReservation.Domain.EventPaymentType", "EventPaymentType")
+                    b.HasOne("DeVLearninG.MyReservation.Domain.EventPaymentType", "EventType")
                         .WithMany()
-                        .HasForeignKey("IdEventPaymentType")
+                        .HasForeignKey("IdEventType")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
