@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace DeVLearninG.MyReservation.Domain
 {
@@ -36,10 +38,13 @@ namespace DeVLearninG.MyReservation.Domain
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnConfiguring(optionsBuilder);
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(_connectionString,
+                    x => x.UseNetTopologySuite());
+            }
 
-            optionsBuilder.UseSqlServer(this._connectionString,
-               x => x.UseNetTopologySuite());
+            base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -160,8 +165,10 @@ namespace DeVLearninG.MyReservation.Domain
 
         private void AddCreatedDatesAndUpdatedDate(ModelBuilder modelBuilder)
         {
+            //Debugger.Launch();
+
             var allEntities = modelBuilder.Model.GetEntityTypes()
-                .Where(x => !x.IsKeyless);
+                .Where(x => { return !ExcludeShadowProperty(x); });
 
             foreach (var entity in allEntities)
             {
@@ -170,6 +177,15 @@ namespace DeVLearninG.MyReservation.Domain
                 entity.AddProperty("UpdatedDate", typeof(DateTimeOffset))
                     .SetDefaultValueSql("sysdatetimeoffset()");
             }
+        }
+
+        private bool ExcludeShadowProperty(IMutableEntityType mutableEntityType)
+        {
+            if (mutableEntityType.IsKeyless) return true;
+
+            var attribute = Attribute.GetCustomAttribute(mutableEntityType.ClrType, typeof(OmitShadowPropertyAttribute));
+
+            return attribute != null;
         }
 
     }

@@ -20,6 +20,8 @@
     <Compile Remove="Migrations\20200521103746_storedTest.Designer.cs" />
     <Compile Remove="Migrations\20200521110914_storedTest.cs" />
     <Compile Remove="Migrations\20200521110914_storedTest.Designer.cs" />
+    <Compile Remove="Migrations\20200603144910_removeCreatedDateFromEventPaymentType.cs" />
+    <Compile Remove="Migrations\20200603144910_removeCreatedDateFromEventPaymentType.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Migrations\addReservationStored_ReadAndList_Down.sql" />

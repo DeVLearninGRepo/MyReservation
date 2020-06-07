@@ -10,9 +10,15 @@ namespace DeVLearninG.MyReservation.Domain
         FreeEvent = 2
     }
 
+    [OmitShadowProperty]
     public class EventPaymentType
     {
         public EventPaymentTypeEnum Id { get; set; }
         public string Name { get; set; }
+    }
+
+    public class OmitShadowPropertyAttribute : Attribute
+    {
+
     }
 }

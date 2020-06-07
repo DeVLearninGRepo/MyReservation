@@ -5,7 +5,12 @@ VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeVLearninG.MyReservation.Domain", "DeVLearninG.MyReservation.Domain\DeVLearninG.MyReservation.Domain.csproj", "{DC38BA86-FF7D-4074-9164-5ED087A9AD7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeVLearninG.MyReservation.Test", "DeVLearninG.MyReservation.Test\DeVLearninG.MyReservation.Test.csproj", "{6DA7D1A7-9403-4A39-949B-2C5C482F11F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeVLearninG.MyReservation.Test", "DeVLearninG.MyReservation.Test\DeVLearninG.MyReservation.Test.csproj", "{6DA7D1A7-9403-4A39-949B-2C5C482F11F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CE3169BE-C4F1-4F0D-A30D-D484E63E53B8}"
+	ProjectSection(SolutionItems) = preProject
+		CodeCoverage.runsettings = CodeCoverage.runsettings
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
