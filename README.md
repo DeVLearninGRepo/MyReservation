@@ -20,7 +20,7 @@ Video di riferimento: https://youtu.be/OP1x1lkHfZk .Net Core - Entity Framework 
 * Creazione di Stored Procedure tramite Code-First
 * Vari esempi di utilizzo delle Migration di EFCore
 
-## EFCore Unit Testring
+## EFCore Unit Testing
 Video di riferimento: https://youtu.be/L9iXUSx9FZk Entity Framework Core xUnit e Code Coverage
 * Introduzione al Test Context
 * Creazione del progetto di Tests
