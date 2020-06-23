@@ -71,7 +71,6 @@ namespace DeVLearninG.MyReservation.Test
             Assert.Equal(1, affectedRows);
         }
 
-
         //[Fact]
         //public async void Customer_Stored()
         //{

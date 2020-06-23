@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		CodeCoverage.runsettings = CodeCoverage.runsettings
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeVLearninG.MyReservation.Repository", "DeVLearninG.MyReservation.Repository\DeVLearninG.MyReservation.Repository.csproj", "{A230306D-BEB7-43EA-A534-C51E98329D24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{6DA7D1A7-9403-4A39-949B-2C5C482F11F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DA7D1A7-9403-4A39-949B-2C5C482F11F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DA7D1A7-9403-4A39-949B-2C5C482F11F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A230306D-BEB7-43EA-A534-C51E98329D24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A230306D-BEB7-43EA-A534-C51E98329D24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A230306D-BEB7-43EA-A534-C51E98329D24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A230306D-BEB7-43EA-A534-C51E98329D24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

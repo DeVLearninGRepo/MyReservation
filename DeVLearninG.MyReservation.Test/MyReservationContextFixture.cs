@@ -34,6 +34,11 @@ namespace DeVLearninG.MyReservation.Test
                 Context.Customers.Add(new Customer() { Id = new Guid("00000000-0000-0000-0000-" + i.ToString("D12")), Name = "NameTest" + i, Surname = "SurnameTest" + i });
             }
 
+            for (int i = 1; i <= 10; i++)
+            {
+                Context.Events.Add(new Event() { Id = new Guid("00000000-0000-0000-0000-" + i.ToString("D12")), Date = DateTime.Now.AddDays(i), Title = "Evento live di DeVLearninG", Description = "Evento live DeVLearninG" });
+            }
+
             Context.SaveChanges();
         }
 
