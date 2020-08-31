@@ -1,29 +1,26 @@
-﻿using DeVLearninG.MyReservation.Infrastructure.Persistence;
+﻿using DeVLearninG.MyReservation.Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace DeVLearninG.MyReservation.Repository
+namespace DeVLearninG.MyReservation.ServiceLayer
 {
-    public class GenericRepository<TEntity, TKey> : IGenericRepository<TEntity, TKey> where TEntity : class
+    public class GenericService<TEntity, TKey> : IGenericService<TEntity, TKey> where TEntity : class
     {
         private readonly MyReservationContext _context;
-        private readonly DbSet<TEntity> _dbSet;
 
         protected MyReservationContext Context => _context;
 
-        public GenericRepository(DbContextOptions options)
+        public GenericService(DbContextOptions options)
         {
             _context = new MyReservationContext(options);
-            _dbSet = _context.Set<TEntity>();
         }
 
-        public GenericRepository(MyReservationContext context)
+        public GenericService(MyReservationContext context)
         {
             _context = context;
-            _dbSet = _context.Set<TEntity>();
         }
 
         public void Delete(TKey id)
@@ -34,7 +31,7 @@ namespace DeVLearninG.MyReservation.Repository
 
             if (entityToDelete == null) throw new Exception("Entity not found");
 
-            _dbSet.Remove(entityToDelete);
+            _context.Set<TEntity>().Remove(entityToDelete);
         }
 
         public void Delete(TEntity entity)
@@ -43,15 +40,15 @@ namespace DeVLearninG.MyReservation.Repository
 
             if (Context.Entry(entity).State == EntityState.Detached)
             {
-                _dbSet.Attach(entity);
+                _context.Set<TEntity>().Attach(entity);
             }
 
-            _dbSet.Remove(entity);
+            _context.Set<TEntity>().Remove(entity);
         }
 
         public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = null)
         {
-            IQueryable<TEntity> query = _dbSet;
+            IQueryable<TEntity> query = _context.Set<TEntity>();
 
             if (predicate != null)
             {
@@ -78,17 +75,17 @@ namespace DeVLearninG.MyReservation.Repository
 
         public TEntity GetById(TKey id)
         {
-            return _dbSet.Find(id);
+            return _context.Set<TEntity>().Find(id);
         }
 
         public void Insert(TEntity entity)
         {
-            _dbSet.Attach(entity);
+            _context.Set<TEntity>().Attach(entity);
         }
 
         public void Update(TEntity entity)
         {
-            _dbSet.Attach(entity);
+            _context.Set<TEntity>().Attach(entity);
 
             _context.Entry(entity).State = EntityState.Modified;
         }

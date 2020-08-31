@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Persistence\Migrations\20200831205740_Refactoring1.cs" />
+    <Compile Remove="Persistence\Migrations\20200831205740_Refactoring1.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200831210120_Refactoring1.cs" />
+    <Compile Remove="Persistence\Migrations\20200831210120_Refactoring1.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Persistence\Migrations\scripts\addReservationStored\Down.sql" />
+    <None Remove="Persistence\Migrations\scripts\addReservationStored\Up.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Persistence\Migrations\scripts\addReservationStored\Down.sql" />
+    <EmbeddedResource Include="Persistence\Migrations\scripts\addReservationStored\Up.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DeVLearninG.MyReservation.Domain\DeVLearninG.MyReservation.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

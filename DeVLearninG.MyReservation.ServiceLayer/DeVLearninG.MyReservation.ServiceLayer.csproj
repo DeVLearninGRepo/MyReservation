@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DeVLearninG.MyReservation.Domain\DeVLearninG.MyReservation.Domain.csproj" />
-    <ProjectReference Include="..\DeVLearninG.MyReservation.Infrastructure\DeVLearninG.MyReservation.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using DeVLearninG.MyReservation.Domain;
+using DeVLearninG.MyReservation.Infrastructure.Persistence;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Validation;
 using System.Text;
 
 namespace DeVLearninG.MyReservation.Repository.UnitOfWork
@@ -27,18 +27,7 @@ namespace DeVLearninG.MyReservation.Repository.UnitOfWork
 
         public int Save()
         {
-            try
-            {
-                return _context.SaveChanges();
-            }
-            catch (DbEntityValidationException dbEx)
-            {
-                string errorMessage = string.Empty;
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                        errorMessage += string.Format("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage) + Environment.NewLine;
-                throw new Exception(errorMessage, dbEx);
-            }
+            return _context.SaveChanges();
         }
 
         protected virtual void Dispose(bool disposing)
